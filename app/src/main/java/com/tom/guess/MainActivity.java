@@ -11,8 +11,15 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    int secret = new Random().nextInt(10)+1;
+    private EditText edNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        edNumber = findViewById(R.id.ed_number);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,6 +36,18 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+    public void guess(View view){
+        int n =Integer.parseInt(edNumber.getText().toString());
+        edNumber.setText(Integer.toString(n));
+            if (n < secret){
+                Toast.makeText(MainActivity.this, "Bigger", Toast.LENGTH_SHORT).show();
+            }else if (n>secret){
+                Toast.makeText(MainActivity.this, "Smaller", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(MainActivity.this, "Bingo", Toast.LENGTH_SHORT).show();
+            }
+
     }
 
     @Override
